@@ -13,7 +13,7 @@ var generatePhrasingImageWidget = function($wrapper){
 
 var fetchPhrasingImageWidget = function($wrapper){
   var widget = $wrapper.data('widget');
-
+  
   if(widget === undefined){
     widget = generatePhrasingImageWidget($wrapper);
     $wrapper.data('widget', widget);
