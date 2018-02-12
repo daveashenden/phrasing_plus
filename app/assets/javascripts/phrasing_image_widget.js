@@ -28,10 +28,10 @@ function PhrasingImageWidget(options) {
   };
 
   var setImageSrc = function (src) {
-    if ($image.size !== 0) {
-      $image.attr('src', src);
-    } else {
+    if ($wrapper.hasClass('phrasable-background-image')) {
       $wrapper.css('background-image', src);
+    } else {
+      $image.attr('src', src);
     }
   };
 
@@ -45,10 +45,11 @@ function PhrasingImageWidget(options) {
     if (fileInput.files && fileInput.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
-        if ($image.size !== 0) {
-          setImageSrc(e.target.result);
-        } else {
-          setImageSrc('url(' + e.target.result + ')');
+        // switch delivery for background and forground images
+        if($wrapper.hasClass('phrasable-background-image')) {
+          $wrapper.css('background-image', 'url(' + e.target.result + ')');
+        }else{
+          $image.attr('src', e.target.result);
         }
       };
       reader.readAsDataURL(fileInput.files[0]);
